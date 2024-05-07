@@ -1,13 +1,30 @@
-export default function Post(){
+import {formatISO9075} from "date-fns"
+import { Link } from "react-router-dom"
+
+export default function Post({_id,title,summary,cover,content,createdAt,author}){
     return(
-        <div className="post">
+      <div className="post">
         <div className="image">
-        <img src="https://imgs.search.brave.com/Xe1bwGIX9ygKl1G-ukiF63tSNoU0O1QtD5e65pjxLFk/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/aXN0b2NrcGhvdG8u/Y29tL3Jlc291cmNl/cy9pbWFnZXMvRnJl/ZVBob3Rvcy9GcmVl/LVBob3RvLTc0MHg0/OTItMTk2MzUwMDc5/My5qcGc"></img>
+          {/* this is imp to show our uploaded images */}
+          <Link to={`/post/${_id}`}>
+          <img src={"http://localhost:4000/"+cover} />
+          </Link>
         </div>
-        <div className ="text">
-        <h2>kfgjkhdfgkhdflgfdkhgfjkhhgfhjklg</h2>
-        <p>hdskgfkcjhdsghjkfgkhdsjgfshdkjfgshjfgkhfgiktdhgfhxjkcbvcxmnbvjshgdfhjdgfdsjhfgfhjdbvfkhgfkghvbkhfgkhj</p>
+        <div className="texts">
+          <Link to={`/post/${_id}`}>          
+            <h2>{title}</h2> 
+          </Link>
+
+          
+
         </div>
+        <p className="info">
+          <a className="author">{author.username}</a> <br/>
+          {/* install date-fns for date purposes */}
+          <time>{formatISO9075(new Date(createdAt))}</time>
+          {/* <time>{createdAt}</time> */}
+        </p>
+        <p className="summary">{summary}</p>
       </div>
 
     )
